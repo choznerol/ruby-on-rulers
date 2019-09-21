@@ -10,3 +10,9 @@ module RulersSupport
 "
   end
 end
+
+class String
+  def to_html
+    gsub!('<', '&lt;').gsub!('>', '&gt;')
+  end
+end
