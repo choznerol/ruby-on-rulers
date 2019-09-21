@@ -1,15 +1,21 @@
+PATH
+  remote: ../..
+  specs:
+    rulers (0.0.3)
+      json (~> 2.2)
+      rack (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
+    json (2.2.0)
     rack (2.0.7)
-    rulers (0.0.1)
-      rack
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  rulers
+  rulers!
 
 BUNDLED WITH
    1.17.2
