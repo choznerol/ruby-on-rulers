@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Lawrence Chou"]
   spec.email         = ["lawrencechou1024@gmail.com"]
 
-  spec.summary       = %q{A Rack-based web framework}
-  spec.description   = %q{A Rack-based web framework, build by following the exercises in <<Rebuilding Rails>>}
+  spec.summary       = %q{A Rack-based web framework from <Rebuilding Rails>}
+  spec.description   = %q{A Rack-based web framework, built by following the book <Rebuilding Rails>}
   spec.homepage      = "https://github.com/choznerol/ruby-on-rulers"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

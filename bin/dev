@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
+
+pushd example_apps/best_quotes
+
+# 監視 rulers 與 BestQuotes (example app) 的改動，自動重啟 server
+bundle exec rerun --dir=../../ -- rackup -p 3025 -s puma
+
+popd
