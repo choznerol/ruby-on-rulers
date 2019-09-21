@@ -1,13 +1,11 @@
 require 'rulers/version'
 require 'rulers/routing'
-require 'rulers/rulers_support'
+require 'rulers/util'
 require 'json'
 require 'pry'
 
 module Rulers
   class Application
-    include RulersSupport
-
     def call(env)
       # 404 for `/favicon.ico`
       return [404, { 'Content-Type' => 'text/html' }, []] if env['PATH_INFO'] == '/favicon.ico'
@@ -19,7 +17,7 @@ module Rulers
       begin
         text = controller.send(act)
       rescue StandardError => e
-        errorDetails = details(summary: e.inspect.to_html,
+        errorDetails = Rulers.details(summary: e.inspect.to_html,
                                content: "Callstack: <br><br> #{e.backtrace.join('<br>')}")
 
         return [
@@ -29,7 +27,7 @@ module Rulers
         ]
       end
 
-      env_details_tag = details(summary: 'Reveal the `env` passed from Rack', content: env)
+      env_details_tag = Rulers.details(summary: 'Reveal the `env` passed from Rack', content: env)
 
       [
           200,
