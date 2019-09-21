@@ -6,6 +6,8 @@ require 'pry'
 
 module Rulers
   class Application
+    include RulersSupport
+
     def call(env)
       # 404 for `/favicon.ico`
       return [404, { 'Content-Type' => 'text/html' }, []] if env['PATH_INFO'] == '/favicon.ico'
@@ -13,7 +15,7 @@ module Rulers
       klass, act = get_controller_and_action(env)
       controller = klass.new(env)
       text = controller.send(act)
-      env_details_tag = RulersSupport.details(summary: 'Reveal the `env` passed from Rack', content: env)
+      env_details_tag = details(summary: 'Reveal the `env` passed from Rack', content: env)
 
       [
           200,

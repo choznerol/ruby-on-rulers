@@ -1,7 +1,7 @@
 require 'json'
 
 module RulersSupport
-  def self.details(summary:, content:)
+  def details(summary:, content:)
     "
 <details>
   <summary> #{summary} </summary>
