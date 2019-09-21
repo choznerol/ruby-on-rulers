@@ -7,6 +7,9 @@ class Object
 
     @calling_const_missing[c] = true
 
+    # Prevent double-loading
+    raise "Trying to autoload #{c} but it is already defined: #{Object.const_get(c).inspect}" if Object.const_defined?(c)
+
     # Actually load the file
     require Rulers.to_underscore(c.to_s)
 
