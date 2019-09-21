@@ -1,5 +1,3 @@
-require_relative './quotes_controller'
-
 class HomeController < Rulers::Controller
   def index
     "
