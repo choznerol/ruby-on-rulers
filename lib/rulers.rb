@@ -33,7 +33,7 @@ module Rulers
 
       [
           200,
-          {'Content-Type' => 'text/html'},
+          {'Content-Type' => 'text/html; charset=utf-8'},
           [text + env_details_tag]
       ]
     end
