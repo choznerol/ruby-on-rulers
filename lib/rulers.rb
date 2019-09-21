@@ -1,4 +1,5 @@
-require "rulers/version"
+require 'rulers/version'
+require 'rulers/rulers_support'
 require 'json'
 
 module Rulers
@@ -9,11 +10,7 @@ module Rulers
 <h1> Yay! You're on Rulers! </h1>
 
 <br/>
-
-<details>
-  <summary> env </summary>
-  <pre>#{JSON.pretty_generate(env)}</pre>
-</details>
+#{RulersSupport.details(summary: 'Reveal the `env` passed from Rack', content: env)}
 "]]
     end
   end
