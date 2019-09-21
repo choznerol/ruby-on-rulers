@@ -2,6 +2,7 @@ require 'rulers/version'
 require 'rulers/routing'
 require 'rulers/rulers_support'
 require 'json'
+require 'pry'
 
 module Rulers
   class Application

@@ -42,4 +42,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "json"
   spec.add_development_dependency "rack-test"
   spec.add_development_dependency "test-unit"
+  spec.add_development_dependency "pry-byebug" # Call `binding.pry` to debug
 end
