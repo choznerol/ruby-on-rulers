@@ -38,9 +38,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.17"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_runtime_dependency "rack"
-  spec.add_runtime_dependency "json"
-  spec.add_development_dependency "rack-test"
-  spec.add_development_dependency "test-unit"
-  spec.add_development_dependency "pry-byebug" # Call `binding.pry` to debug
+  spec.add_runtime_dependency "rack", "~> 2.0"
+  spec.add_runtime_dependency "json", "~> 2.2"
+  spec.add_development_dependency "rack-test", "~> 1.1"
+  spec.add_development_dependency "test-unit", "~> 3.3"
+  spec.add_development_dependency "pry-byebug", "~> 3.7" # Call `binding.pry` to debug
 end
