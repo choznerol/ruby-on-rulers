@@ -13,6 +13,9 @@ class Object
     # Actually load the file
     require Rulers.to_underscore(c.to_s)
 
+    # Raise if filename and class/module name not matched
+    raise "Loaded '#{Rulers.to_underscore(c.to_s)}' but #{c} was still not defined." unless Object.const_defined?(c)
+
     klass = Object.const_get(c)
     @calling_const_missing[c] = false
 
