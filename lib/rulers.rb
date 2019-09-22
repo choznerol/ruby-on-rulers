@@ -3,7 +3,6 @@ require 'rulers/routing'
 require 'rulers/dependencies'
 require 'rulers/util'
 require 'json'
-require 'pry'
 
 module Rulers
   class Application
