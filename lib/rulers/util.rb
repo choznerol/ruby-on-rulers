@@ -12,6 +12,6 @@ end
 
 class String
   def to_html
-    gsub!('<', '&lt;').gsub!('>', '&gt;')
+    gsub('<', '&lt;').gsub('>', '&gt;')
   end
 end
