@@ -2,6 +2,7 @@ PATH
   remote: ../..
   specs:
     rulers (0.0.4)
+      erubis (~> 2.7)
       json (~> 2.2)
       rack (~> 2.0)
 
@@ -10,6 +11,7 @@ GEM
   specs:
     byebug (11.0.1)
     coderay (1.1.2)
+    erubis (2.7.0)
     ffi (1.11.1)
     json (2.2.0)
     listen (3.1.5)
