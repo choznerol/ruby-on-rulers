@@ -46,6 +46,7 @@ end
 # Test rendering
 class TemplatesController < Rulers::Controller
   def my_template
+    @my_instance_var = 42
     render 'my_template', content: 'A local var'
   end
   def missing_template
@@ -53,15 +54,16 @@ class TemplatesController < Rulers::Controller
   end
 end
 class RulersAppTest
-  def test_rendering
+  def test_rendering_with_locals_and_instance_var
     begin
       f = File.new('app/views/templates/my_template.html.erb', 'w')
-      f.write('<h1><%= content %></h1>')
+      f.write('<h1><%= content %></h1><p><%= @my_instance_var %></p>')
       f.close
 
       get '/templates/my_template'
       assert last_response.ok?
       assert last_response.body['<h1>A local var</h1>']
+      assert last_response.body['<p>42</p>']
     ensure
       File.delete('app/views/templates/my_template.html.erb')
     end

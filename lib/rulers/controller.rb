@@ -21,7 +21,8 @@ module Rulers
 
       template = File.read filepath
       eruby = Erubis::Eruby.new(template)
-      eruby.result locals.merge(:env => env)
+      ivar = self.instance_variables.map{|k| [k, self.instance_variable_get(k)]}.to_h
+      eruby.result locals.merge(env: env).merge(ivar)
     end
 
     private
