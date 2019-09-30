@@ -6,4 +6,8 @@ class QuotesController < Rulers::Controller
   def exception
     raise "It's a bad one!"
   end
+
+  def template_missing
+    render 'no_exist_template'
+  end
 end

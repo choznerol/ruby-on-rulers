@@ -11,7 +11,7 @@ class RulersAppTest < Test::Unit::TestCase
 end
 
 
-# Test index
+# Test root_to Home#index
 class HomeController < Rulers::Controller
   def index
     'Home#index'
@@ -48,6 +48,9 @@ class TemplatesController < Rulers::Controller
   def my_template
     render 'my_template', content: 'A local var'
   end
+  def missing_template
+    render 'not_exist_template'
+  end
 end
 class RulersAppTest
   def test_rendering
@@ -62,5 +65,26 @@ class RulersAppTest
     ensure
       File.delete('app/views/templates/my_template.html.erb')
     end
+  end
+
+  def test_template_lookup_in_views_dir
+    begin
+      f = File.new('app/views/my_template.html.erb', 'w')
+      f.write('<h1><%= content %></h1>')
+      f.close
+
+      get '/templates/my_template'
+      assert last_response.ok?
+      assert last_response.body['<h1>A local var</h1>']
+    ensure
+      File.delete('app/views/my_template.html.erb')
+    end
+  end
+
+  def test_template_missing_error_message
+    get '/templates/missing_template'
+    assert last_response.server_error?
+    body = last_response.body
+    assert body['找不到'] && body['not_exist_template'] && body['已搜尋下列路徑']
   end
 end
