@@ -1,45 +1,55 @@
 require_relative 'test_helper'
 # require 'pry'
 
-class TestApp < Rulers::Application
-end
-class HomeController < Rulers::Controller
-  def index
-    'Home#index'
-  end
-end
-class FoosController < Rulers::Controller
-  def bar
-    'FoosController#action'
-  end
-end
-class TemplatesController < Rulers::Controller
-  def my_template
-    render 'my_template', content: 'A local var'
-  end
-end
-
+class TestApp < Rulers::Application; end
 class RulersAppTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def app
     TestApp.new
   end
+end
 
+
+# Test index
+class HomeController < Rulers::Controller
+  def index
+    'Home#index'
+  end
+end
+class RulersAppTest
   def test_index
     get '/'
     assert last_response.ok?
     body = last_response.body
     assert body['Home#index']
   end
+end
 
+
+# Test routing
+class FoosController < Rulers::Controller
+  def bar
+    'FoosController#action'
+  end
+end
+class RulersAppTest
   def test_routing
     get '/foos/bar'
     assert last_response.ok?
     body = last_response.body
     assert body['FoosController#action']
   end
+end
 
+
+# Test rendering
+class TemplatesController < Rulers::Controller
+  def my_template
+    render 'my_template', content: 'A local var'
+  end
+end
+class RulersAppTest
   def test_rendering
     begin
       f = File.new('app/views/templates/my_template.html.erb', 'w')
