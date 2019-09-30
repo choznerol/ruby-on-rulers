@@ -1,0 +1,16 @@
+<h1> 首頁 </h1>
+
+<ul>
+  <% actions_by_controller.each do |controller, actions| %>
+    <% actions.each do |action| %>
+      <li>
+        <a href='/<%= controller %>/<%= action %>'>
+          <code><%= controller %>#<%= action %></code>
+        </a>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<p> Rulers version <%= Rulers::VERSION %> </p>
+<p> Ruby version <%= RUBY_VERSION %> </p>
