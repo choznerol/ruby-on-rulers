@@ -2,6 +2,7 @@ require 'rulers/version'
 require 'rulers/routing'
 require 'rulers/dependencies'
 require 'rulers/util'
+require 'rulers/controller'
 require 'json'
 
 module Rulers
@@ -34,16 +35,6 @@ module Rulers
           {'Content-Type' => 'text/html; charset=utf-8'},
           [text + env_details_tag]
       ]
-    end
-  end
-
-  class Controller
-    def initialize(env)
-      @env = env
-    end
-
-    def env
-      @env
     end
   end
 end
