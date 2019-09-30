@@ -1,0 +1,13 @@
+<details>
+  <summary><%= error.class %></summary>
+
+  <h5>Message:</h5>
+  <pre><%= error.message.to_html %></pre>
+
+  <h5>Callstack:</h5>
+  <pre>
+    <% error.backtrace.each do |line| %>
+    <%= line %><br/>
+    <% end %>
+  </pre>
+</details>

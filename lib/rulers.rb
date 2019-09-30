@@ -3,13 +3,13 @@ require 'rulers/routing'
 require 'rulers/dependencies'
 require 'rulers/util'
 require 'rulers/controller'
-require 'json'
+require 'pry-byebug'
 
 module Rulers
   class Application
     def call(env)
       # 404 for `/favicon.ico`
-      return [404, { 'Content-Type' => 'text/html' }, []] if %w[/favicon.ico robot.txt].include? env['PATH_INFO']
+      return [404, headers, []] if %w[/favicon.ico robot.txt].include? env['PATH_INFO']
 
       klass, act = get_controller_and_action(env)
       controller = klass.new(env)
@@ -18,23 +18,18 @@ module Rulers
       begin
         text = controller.send(act)
       rescue StandardError => e
-        errorDetails = Rulers.details(summary: e.inspect.to_html,
-                               content: "Callstack: <br><br> #{e.backtrace.join('<br>')}")
+        error_text = controller.render('500', error: e)
 
-        return [
-            500,
-            { 'Content-Type' => 'text/html; charset=utf-8' },
-            ["<h1> 糟糕！ <code>#{klass.name}##{act}</code> 處理請求時發生錯誤：</h1> #{errorDetails}"]
-        ]
+        return [500, headers, ["<h1> 糟糕！ <code>#{klass.name}##{act}</code> 處理請求時發生錯誤：</h1> #{error_text}"]]
       end
 
-      env_details_tag = Rulers.details(summary: 'Reveal the `env` passed from Rack', content: env)
+      [200, headers, [text]]
+    end
 
-      [
-          200,
-          {'Content-Type' => 'text/html; charset=utf-8'},
-          [text + env_details_tag]
-      ]
+    private
+
+    def headers
+      {'Content-Type' => 'text/html; charset=utf-8'}
     end
   end
 end
